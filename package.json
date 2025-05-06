@@ -1,0 +1,55 @@
+{
+  "name": "video-timecode-analyzer",
+  "version": "1.0.0",
+  "description": "Анализ видео по таймкодам",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "webpack --config webpack.config.js",
+    "dev": "webpack --config webpack.config.js && electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.0",
+    "@babel/preset-react": "^7.17.12",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "electron-builder": "^23.0.3",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "electron": "^18.0.0"
+  },
+  "build": {
+    "appId": "net.edwardcode.video-timecode-analyzer",
+    "productName": "analyzer",
+    "files": [
+      "build/**/*",
+      "main.js",
+      "preload.js",
+      "index.html",
+      "styles.css"
+    ],
+    "icon": "images/icon.png",
+    "mac": {
+      "category": "public.app-category.video"
+    },
+    "win": {
+      "target": "portable",
+      "icon": "images/icon.ico",
+      "signAndEditExecutable": true,
+      "certificateSubjectName": "E=support@sculk.ltd, CN=IP Ilin Eduard Alekseevich, O=IP Ilin Eduard Alekseevich, L=Strelnikovo, S=Kostroma Oblast, C=RU",
+      "rfc3161TimeStampServer": "http://timestamp.globalsign.com/tsa/r6advanced1"
+    },
+    "linux": {
+      "target": "AppImage"
+    },
+    "portable": {
+      "artifactName": "VideoTimecodeAnalyzer.exe"
+    }
+  }}
