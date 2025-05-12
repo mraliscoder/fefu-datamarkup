@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import TimecodeList from './TimecodeList';
+import emotions from "../../resources/emotions.jpg";
 
 const PlayerScreen = ({ videoFile, timecodes, updateTimecodeResponse, onExport }) => {
   const videoRef = useRef(null);
@@ -85,6 +86,9 @@ const PlayerScreen = ({ videoFile, timecodes, updateTimecodeResponse, onExport }
             </div>
 
             <div className="preview-section">
+              <div>
+                <img src={emotions} alt="Emotions wheel" className="emotions" />
+              </div>
               <div>&copy; {new Date().getFullYear()} <a href="https://edwardcode.net/" target="_blank">Eduard Ilin</a></div>
             </div>
           </div>
@@ -94,7 +98,7 @@ const PlayerScreen = ({ videoFile, timecodes, updateTimecodeResponse, onExport }
           <div className="timecodes-header">
             <h3>Метки</h3>
             <button className="export-button" onClick={onExport}>
-              Экспорт в CSV
+              Экспорт
             </button>
           </div>
 

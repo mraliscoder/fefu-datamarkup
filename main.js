@@ -1,6 +1,14 @@
 const {app, BrowserWindow, dialog, ipcMain} = require('electron');
 const path = require('path');
 const fs = require('fs');
+const XLSX = require('xlsx');
+const {
+  checkCacheExists,
+  saveCacheFile,
+  loadCacheFile,
+  clearCacheFile
+} = require('./electronFunctions');
+
 
 let mainWindow;
 
@@ -67,4 +75,44 @@ ipcMain.handle('export-csv', async (event, data) => {
     return true;
   }
   return false;
+});
+
+ipcMain.handle('export-xlsx', async (event, data) => {
+  const {canceled, filePath} = await dialog.showSaveDialog({
+    title: 'Сохранить XLSX',
+    defaultPath: 'video-analysis.xlsx',
+    filters: [
+      {name: 'Excel Files', extensions: ['xlsx']}
+    ]
+  });
+  if (!canceled && filePath) {
+    try {
+      const jsonData = JSON.parse(data);
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(jsonData);
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Разметка видео");
+      XLSX.writeFile(workbook, filePath);
+      return true;
+    } catch (error) {
+      console.error('Ошибка при экспорте XLSX:', error);
+      return false;
+    }
+  }
+  return false;
+});
+
+ipcMain.handle('check-cache', async () => {
+  return checkCacheExists();
+});
+
+ipcMain.handle('save-cache', async (_, cacheData) => {
+  return saveCacheFile(cacheData);
+});
+
+ipcMain.handle('load-cache', async () => {
+  return loadCacheFile();
+});
+
+ipcMain.handle('clear-cache', async () => {
+  return clearCacheFile();
 });
