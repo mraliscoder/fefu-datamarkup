@@ -13,15 +13,13 @@ const App = () => {
   const [cacheTimestamp, setCacheTimestamp] = useState(null);
   const [saveIndicator, setSaveIndicator] = useState({ show: false, message: '' });
 
-  // Показать индикатор сохранения/загрузки
   const showSaveIndicator = (message) => {
     setSaveIndicator({ show: true, message });
     setTimeout(() => {
       setSaveIndicator({ show: false, message: '' });
-    }, 3000); // Скрыть через 3 секунды
+    }, 3000);
   };
 
-  // Проверить наличие кэша при загрузке приложения
   useEffect(() => {
     const checkForCache = async () => {
       try {
@@ -41,7 +39,6 @@ const App = () => {
     checkForCache();
   }, []);
 
-  // Автоматическое сохранение при изменении данных
   const updateTimecodeResponse = useCallback((id, field, value) => {
     setTimecodes(prevTimecodes => {
       const updatedTimecodes = prevTimecodes.map(code =>
@@ -50,13 +47,11 @@ const App = () => {
           : code
       );
 
-      // Проверяем, заполнены ли все обязательные поля в этом таймкоде
       const updatedTimecode = updatedTimecodes.find(code => code.id === id);
       if (updatedTimecode) {
         const { involvement, emotion, intensity, control, pleasure } = updatedTimecode.responses;
         const allRequiredFieldsFilled = involvement && emotion && intensity && control && pleasure;
 
-        // Если все обязательные поля заполнены, сохраняем кэш
         if (allRequiredFieldsFilled) {
           saveCache(videoFile, updatedTimecodes).then(success => {
             if (success) {
@@ -70,21 +65,18 @@ const App = () => {
     });
   }, [videoFile]);
 
-  // Обработчик старта новой сессии
   const handleStart = (timecodeInput) => {
     const parsedTimecodes = parseTimecodes(timecodeInput);
     if (parsedTimecodes.length > 0) {
       setTimecodes(parsedTimecodes);
       setIsStarted(true);
 
-      // Сохраняем начальные данные
       saveCache(videoFile, parsedTimecodes);
     } else {
       alert('Пожалуйста, введите корректные таймкоды');
     }
   };
 
-  // Открытие файла
   const handleOpenFile = async () => {
     try {
       const filePath = await window.electron.openFile();
@@ -144,7 +136,6 @@ const App = () => {
     }
   };
 
-  // Загрузка кэша
   const handleLoadCache = async () => {
     try {
       const cache = await loadCache();
@@ -165,7 +156,6 @@ const App = () => {
     }
   };
 
-  // Начать новую сессию (отказаться от кэша)
   const handleCancelCache = async () => {
     try {
       await clearCache();

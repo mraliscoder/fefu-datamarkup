@@ -75,7 +75,6 @@ body {
     overflow: hidden;
 }
 
-/* Стили начального экрана */
 .start-screen {
     display: flex;
     flex-direction: column;
@@ -192,7 +191,6 @@ button:disabled {
     min-width: 150px;
 }
 
-/* Стили экрана плеера */
 .player-screen {
     height: 100vh;
     overflow: hidden;
@@ -206,7 +204,6 @@ button:disabled {
     overflow: hidden;
 }
 
-/* Секция видео */
 .video-section {
     flex: 2;
     padding: 1.5rem;
@@ -267,7 +264,6 @@ button:disabled {
     display: block;
 }
 
-/* Предпросмотр таймкодов */
 .preview-section {
     margin-top: 2rem;
 }
@@ -365,7 +361,6 @@ button:disabled {
     background-color: var(--secondary-color);
 }
 
-/* Элементы таймкодов */
 .timecode-list {
     display: flex;
     flex-direction: column;
@@ -448,7 +443,6 @@ button:disabled {
     font-size: 0.875rem;
 }
 
-/* Форма таймкода */
 .timecode-form {
     padding: 1.5rem;
     background-color: #fff;
@@ -528,7 +522,6 @@ textarea.form-control {
     resize: vertical;
 }
 
-/* Адаптация под разные соотношения сторон */
 .player-container.square-video {
     flex-direction: column;
 }
@@ -544,9 +537,8 @@ textarea.form-control {
     border-top: 1px solid var(--border-color);
 }
 
-/* Управление состояниями сворачивания */
 .timecode-item {
-    max-height: 2000px; /* Достаточно для любого содержимого */
+    max-height: 2000px;
     transition: max-height var(--transition-slow),
     margin-bottom var(--transition-normal),
     box-shadow var(--transition-normal);
@@ -559,10 +551,9 @@ textarea.form-control {
 }
 
 .timecode-item.collapsed {
-    max-height: 80px; /* Только заголовок */
+    max-height: 80px;
 }
 
-/* Адаптивность для мобильных устройств */
 @media (max-width: 991px) {
     .player-container {
         flex-direction: column;
@@ -619,7 +610,6 @@ textarea.form-control {
     }
 }
 
-/* Styles for the rating selector */
 .rating-selector {
     display: flex;
     justify-content: space-between;
@@ -742,7 +732,6 @@ textarea.form-control {
     background-color: #5a6268;
 }
 
-/* Индикатор загрузки и сохранения */
 .save-indicator {
     position: fixed;
     bottom: 20px;
