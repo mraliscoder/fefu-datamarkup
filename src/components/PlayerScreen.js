@@ -92,7 +92,7 @@ const PlayerScreen = ({ videoFile, timecodes, updateTimecodeResponse, onExport }
 
         <div className="timecodes-section">
           <div className="timecodes-header">
-            <h3>Таймкоды</h3>
+            <h3>Метки</h3>
             <button className="export-button" onClick={onExport}>
               Экспорт в CSV
             </button>

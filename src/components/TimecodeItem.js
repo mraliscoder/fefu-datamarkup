@@ -4,7 +4,7 @@ const TimecodeItem = ({ timecode, isActive, onPlay, updateResponse }) => {
   const { start, end, responses } = timecode;
   const [isExpanded, setIsExpanded] = useState(isActive);
 
-  const filledFields = Object.values(responses).filter(val => val && val !== "").length;
+  const filledFields = Object.values(responses).filter(val => val && val !== "").length - (responses.comment ? 1 : 0);
   const totalFields = 5;
   const progressPercentage = Math.floor((filledFields / totalFields) * 100);
 
